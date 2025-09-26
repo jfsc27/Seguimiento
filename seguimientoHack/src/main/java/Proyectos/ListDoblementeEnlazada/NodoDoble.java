@@ -1,5 +1,7 @@
 package Proyectos.ListDoblementeEnlazada;
 
+import Proyectos.ListasSimplementeEnlazada.Nodo;
+
 public class NodoDoble<T> {
     private T dato;
     private NodoDoble<T> proximo;

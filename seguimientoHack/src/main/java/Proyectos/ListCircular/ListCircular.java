@@ -45,7 +45,7 @@ public class ListCircular<T> {
         }
         tam++;
     }
-    
+
     public void mostrar() {
         if (primero == null) {
             System.out.println("[]");
