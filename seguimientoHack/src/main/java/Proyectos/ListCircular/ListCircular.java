@@ -8,63 +8,65 @@ public class ListCircular<T> {
         primero = null;
         tam = 0;
     }
-    public void agregarPrimero(T dato){
-        Nodo<T> newNodo = new Nodo(dato);
-        if (primero == null){
-            primero = newNodo;
-            tam++;
+    public void agregarPrimero(T dato) {
+        Nodo<T> nuevo = new Nodo<>(dato);
+
+        if (primero == null) {
+            primero = nuevo;
+            nuevo.setProximo(primero);
         } else {
             Nodo<T> actual = primero;
-            if (actual.getProximo() == null){
-                newNodo.setProximo(primero);
-                actual.setProximo(newNodo);
-                primero = newNodo;
-            }else {
-                while (actual.getProximo() != primero){
-                    actual = actual.getProximo();
-                }
-                actual.setProximo(newNodo);
-                newNodo.setProximo(primero);
-                primero = newNodo;
+            while (actual.getProximo() != primero) {
+                actual = actual.getProximo();
             }
+
+            nuevo.setProximo(primero);
+            actual.setProximo(nuevo);
+            primero = nuevo;
         }
         tam++;
     }
+
 
     public void agregarUltimo(T dato) {
-        Nodo<T> newNodo = new Nodo(dato);
-        if (primero == null){
-            primero = newNodo;
+        Nodo<T> nuevo = new Nodo<>(dato);
+
+        if (primero == null) {
+            primero = nuevo;
+            nuevo.setProximo(primero);
         } else {
             Nodo<T> actual = primero;
-            if (actual.getProximo() == null){
-                actual.setProximo(newNodo);
-                newNodo.setProximo(primero);
-            }else {
-                while (actual.getProximo() != primero){
-                    actual = actual.getProximo();
-                }
-                actual.setProximo(newNodo);
-                newNodo.setProximo(primero);
+
+            while (actual.getProximo() != primero) {
+                actual = actual.getProximo();
             }
+            actual.setProximo(nuevo);
+            nuevo.setProximo(primero);
         }
         tam++;
     }
-    public void mostrar(){
-        Nodo<T> actual = primero;
-        String mensaje = "[";
-        while (actual != null){
-            if (actual.getProximo() == null){
-                mensaje += actual.getDato() + "";
-
-            }else{
-                mensaje += actual.getDato() + ",";
-
-            }
-            actual = actual.getProximo();
-
+    
+    public void mostrar() {
+        if (primero == null) {
+            System.out.println("[]");
+            return;
         }
-        mensaje += "]";
-        System.out.println(mensaje);
+
+        Nodo<T> actual = primero;
+        StringBuilder mensaje = new StringBuilder("[");
+        do {
+            mensaje.append(actual.getDato());
+            actual = actual.getProximo();
+            if (actual != primero) {
+                mensaje.append(", ");
+            }
+        } while (actual != primero);
+        mensaje.append("]");
+
+        System.out.println(mensaje.toString());
+    }
+
+    public int size() {
+        return tam;
     }
 }
