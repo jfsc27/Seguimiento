@@ -5,10 +5,55 @@ public class Cola <T> {
     private Nodo<T> ultimo;
     private int tam;
 
-    public Cola(Nodo<T> primero, Nodo<T> ultimo) {
+    public Cola() {
         this.primero = null;
         this.ultimo = null;
         this.tam = 0;
+    }
+
+    public void encolar(T dato) {
+        Nodo<T> newNodo = new Nodo<>(dato);
+        if (primero == null) {
+            primero = newNodo;
+            ultimo = newNodo;
+        } else {
+            ultimo.setProximo(newNodo);
+            ultimo = newNodo;
+        }
+        tam++;
+    }
+
+    public void mostrar() {
+        if (primero == null) {
+            System.out.println("[]");
+            return;
+        }
+
+        Nodo<T> actual = primero;
+        String mensaje = "[";
+        while (actual != null) {
+            mensaje += actual.getDato();
+            actual = actual.getProximo();
+            if (actual != null) {
+                mensaje += ", ";
+            }
+        }
+        mensaje += "]";
+        System.out.println(mensaje);
+    }
+
+    public T desencolar(T dato) {
+        if (primero == null) {
+            System.out.println("Cola vacía");
+            return null;
+        }
+        T datico = primero.getDato();
+        primero = primero.getProximo();
+        if (primero == null) {
+            ultimo = null;
+        }
+        tam--;
+        return dato;
     }
 
     public Nodo<T> getPrimero() {
