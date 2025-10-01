@@ -51,7 +51,7 @@ public class BiCola<T>{
     }
 
     public T desencolarDelFinal() {
-        if (primero == null) { 
+        if (primero == null) {
             System.out.println("Cola vacía");
             return null;
         }
