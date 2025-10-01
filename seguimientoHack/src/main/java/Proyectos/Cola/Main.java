@@ -5,8 +5,12 @@ public class Main {
         Cola<String> cola = new Cola<>();
 
         cola.encolar("Juan");
+        cola.encolar("Tomas");
         cola.mostrar();
-        cola.desencolar("Juan");
+        
+        String elimidado= cola.desencolar("Juan");
+        System.out.println("Se elimino a: "+elimidado);
+
         cola.mostrar();
     }
 }

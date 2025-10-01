@@ -44,7 +44,6 @@ public class Cola <T> {
 
     public T desencolar(T dato) {
         if (primero == null) {
-            System.out.println("Cola vacía");
             return null;
         }
         T datico = primero.getDato();
