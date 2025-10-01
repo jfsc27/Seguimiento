@@ -1,5 +1,4 @@
-package Proyectos.ListDoblementeEnlazada;
-
+package Proyectos.ListaDoblementeEnlazadaCircular;
 
 public class NodoDoble<T> {
     private T dato;
@@ -8,8 +7,8 @@ public class NodoDoble<T> {
 
     public NodoDoble(T dato) {
         this.dato = dato;
-        proximo = null;
-        anterior = null;// Null inicialmente ya que no hay nada antes de estar en la lista
+        this.proximo = this; // Al inicio apunta a sí mismo
+        this.anterior = this;
     }
 
     public T getDato() {
@@ -38,9 +37,6 @@ public class NodoDoble<T> {
 
     @Override
     public String toString() {
-        return "Nodo{" +
-                "dato=" + dato +
-                ", proximo=" + proximo +
-                '}';
+        return "Nodo{" + "dato=" + dato + '}';
     }
 }
