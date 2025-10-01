@@ -55,6 +55,10 @@ public class Cola <T> {
         return dato;
     }
 
+    public boolean esVacia(){
+        return primero == null;
+    }
+
     public Nodo<T> getPrimero() {
         return primero;
     }
