@@ -11,6 +11,7 @@ public class Main {
 
         biCola.desencolarDelFinal();
         biCola.mostrar();
+
     }
 
 }
