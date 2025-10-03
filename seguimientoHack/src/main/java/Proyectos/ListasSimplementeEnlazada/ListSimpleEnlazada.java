@@ -77,6 +77,43 @@ public class ListSimpleEnlazada<T extends Comparable<T>> implements Iterable<T> 
         System.out.println(mensaje);
     }
 
+    public void ordenarAsc() {
+        if (primero == null || primero.getProximo() == null) {
+            return;
+        }
+        Nodo<T> actual = primero;
+        while (actual != null) {
+            Nodo<T> siguiente = actual.getProximo();
+            while (siguiente != null) {
+                if (actual.getDato().compareTo(siguiente.getDato()) > 0) {
+                    T temp = actual.getDato();
+                    actual.setDato(siguiente.getDato());
+                    siguiente.setDato(temp);
+                }
+                siguiente = siguiente.getProximo();
+            }
+            actual = actual.getProximo();
+        }
+    }
+
+    public void insertarOrdenado(T dato) {
+        Nodo<T> nuevo = new Nodo<>(dato);
+
+        if (primero == null || dato.compareTo(primero.getDato()) < 0) {
+            nuevo.setProximo(primero);
+            primero = nuevo;
+        } else {
+            Nodo<T> actual = primero;
+            while (actual.getProximo() != null && actual.getProximo().getDato().compareTo(dato) <
+                    0) {
+                actual = actual.getProximo();
+            }
+            nuevo.setProximo(actual.getProximo());
+            actual.setProximo(nuevo);
+        }
+        tam++;
+    }
+
     public boolean esVacia(){
         return (primero == null && tam == 0) ? true : false;
     }
@@ -126,28 +163,6 @@ public class ListSimpleEnlazada<T extends Comparable<T>> implements Iterable<T> 
          }
          return false;
     }
-
-    public void agregarOrdenado(T dato) {
-        Nodo<T> newNodo = new Nodo<>(dato);
-
-        if (primero == null || ((Comparable<T>)dato).compareTo(primero.getDato()) < 0) {
-            newNodo.setProximo(primero);
-            primero = newNodo;
-            tam++;
-            return;
-        }
-
-        Nodo<T> actual = primero;
-        while (actual.getProximo() != null &&
-                ((Comparable<T>)dato).compareTo(actual.getProximo().getDato()) > 0) {
-            actual = actual.getProximo();
-        }
-
-        newNodo.setProximo(actual.getProximo());
-        actual.setProximo(newNodo);
-        tam++;
-    }
-
     public int getTam() {
         return tam;
     }

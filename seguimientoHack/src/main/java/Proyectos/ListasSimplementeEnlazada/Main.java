@@ -15,12 +15,11 @@ public class Main {
 
         lista.agregarEn(3, "Manuela");
 
-        lista.agregarOrdenado("Angel");
-        lista.agregarOrdenado("Agus");
-
-        for (String valor : lista) {
-            System.out.println(valor);
-        }
+        lista.insertarOrdenado("Angel");
+        lista.insertarOrdenado("Agus");
+        lista.mostrar();
+        lista.ordenarAsc();
+        lista.mostrar();
 
     }
 }
