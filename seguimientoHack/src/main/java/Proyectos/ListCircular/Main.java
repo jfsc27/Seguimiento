@@ -6,6 +6,12 @@ public class Main {
         listCircular.agregarPrimero("9");
         listCircular.agregarPrimero("8");
         listCircular.agregarUltimo("Juan");
+        listCircular.agregarUltimo("Marco");
+        listCircular.agregarPrimero("Pedro");
+        listCircular.agregarOrdenado("Aomas");
+        listCircular.agregarOrdenado("Zomas");
+        listCircular.mostrar();
+        listCircular.ordenarAsc();
         listCircular.mostrar();
     }
 }
