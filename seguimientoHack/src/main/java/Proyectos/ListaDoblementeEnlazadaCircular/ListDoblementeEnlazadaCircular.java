@@ -1,6 +1,6 @@
 package Proyectos.ListaDoblementeEnlazadaCircular;
 
-public class ListDoblementeEnlazadaCircular<T> {
+public class ListDoblementeEnlazadaCircular<T extends Comparable<T>> {
     private NodoDoble<T> primero;
     private NodoDoble<T> ultimo;
     private int tam;
@@ -90,7 +90,62 @@ public class ListDoblementeEnlazadaCircular<T> {
         mensaje.append("]");
         System.out.println(mensaje.toString());
     }
+    public void ordenarAsc() {
+        if (primero == null || primero.getProximo() == primero) {
+            return;
+        }
 
+        NodoDoble<T> actual = primero;
+        do {
+            NodoDoble<T> siguiente = actual.getProximo();
+            while (siguiente != primero) {
+                if (actual.getDato().compareTo(siguiente.getDato()) > 0) {
+                    T temp = actual.getDato();
+                    actual.setDato(siguiente.getDato());
+                    siguiente.setDato(temp);
+                }
+                siguiente = siguiente.getProximo();
+            }
+            actual = actual.getProximo();
+        } while (actual.getProximo() != primero);
+    }
+
+    public void insertarOrdenado(T dato) {
+        NodoDoble<T> nuevo = new NodoDoble<>(dato);
+
+        if (primero == null) { // lista vacía
+            primero = nuevo;
+            ultimo = nuevo;
+            nuevo.setProximo(nuevo);
+            nuevo.setAnterior(nuevo);
+        } else if (dato.compareTo(primero.getDato()) < 0) {
+            // Insertar antes del primero
+            nuevo.setProximo(primero);
+            nuevo.setAnterior(ultimo);
+            primero.setAnterior(nuevo);
+            ultimo.setProximo(nuevo);
+            primero = nuevo;
+        } else if (dato.compareTo(ultimo.getDato()) >= 0) {
+            // Insertar al final
+            nuevo.setAnterior(ultimo);
+            nuevo.setProximo(primero);
+            ultimo.setProximo(nuevo);
+            primero.setAnterior(nuevo);
+            ultimo = nuevo;
+        } else {
+            // Insertar en medio
+            NodoDoble<T> actual = primero.getProximo();
+            while (actual != primero && actual.getDato().compareTo(dato) < 0) {
+                actual = actual.getProximo();
+            }
+            NodoDoble<T> anterior = actual.getAnterior();
+            anterior.setProximo(nuevo);
+            nuevo.setAnterior(anterior);
+            nuevo.setProximo(actual);
+            actual.setAnterior(nuevo);
+        }
+        tam++;
+    }
     // Getters
     public int getTam() {
         return tam;
