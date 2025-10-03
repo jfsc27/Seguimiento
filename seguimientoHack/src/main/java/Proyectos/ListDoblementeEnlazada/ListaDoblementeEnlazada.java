@@ -1,6 +1,6 @@
 package Proyectos.ListDoblementeEnlazada;
 
-public class ListaDoblementeEnlazada<T> {
+public class ListaDoblementeEnlazada<T extends Comparable<T>> {
     private NodoDoble<T> primero;
     private NodoDoble<T> ultimo;
     private int tam;
@@ -86,6 +86,55 @@ public class ListaDoblementeEnlazada<T> {
         }
         mensaje += "]";
         System.out.println(mensaje);
+    }
+
+    public void ordenarAsc() {
+        if (primero == null || primero.getProximo() == null) {
+            return;
+        }
+
+        NodoDoble<T> actual = primero;
+
+        while (actual != null) {
+            NodoDoble<T> siguiente = actual.getProximo();
+            while (siguiente != null) {
+                if (actual.getDato().compareTo(siguiente.getDato()) > 0) {
+                    T temp = actual.getDato();
+                    actual.setDato(siguiente.getDato());
+                    siguiente.setDato(temp);
+                }
+                siguiente = siguiente.getProximo();
+            }
+            actual = actual.getProximo();
+        }
+    }
+
+    public void insertarOrdenado(T dato) {
+        NodoDoble<T> nuevo = new NodoDoble<>(dato);
+
+        if (primero == null) {
+            primero = nuevo;
+            ultimo = nuevo;
+        } else if (dato.compareTo(primero.getDato()) < 0) {
+            nuevo.setProximo(primero);
+            primero.setAnterior(nuevo);
+            primero = nuevo;
+        } else if (dato.compareTo(ultimo.getDato()) >= 0) {
+            ultimo.setProximo(nuevo);
+            nuevo.setAnterior(ultimo);
+            ultimo = nuevo;
+        } else {
+            NodoDoble<T> actual = primero.getProximo();
+            while (actual != null && actual.getDato().compareTo(dato) < 0) {
+                actual = actual.getProximo();
+            }
+            NodoDoble<T> anterior = actual.getAnterior();
+            anterior.setProximo(nuevo);
+            nuevo.setAnterior(anterior);
+            nuevo.setProximo(actual);
+            actual.setAnterior(nuevo);
+        }
+        tam++;
     }
 
     // Getters y Setters
