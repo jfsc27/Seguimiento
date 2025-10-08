@@ -2,7 +2,7 @@ package Proyectos.BiCola;
 
 public class Nodo<T>{
     private T dato;
-    private Proyectos.Cola.Nodo<T > proximo; //Referencia siguiente elemento
+    private Nodo<T > proximo; //Referencia siguiente elemento
 
     public Nodo(T dato) {
         this.dato = dato;
@@ -14,14 +14,15 @@ public class Nodo<T>{
     }
 
     public void setDato(T dato) {
+
         this.dato = dato;
     }
 
-    public Proyectos.Cola.Nodo<T> getProximo() {
+    public Nodo<T> getProximo() {
         return proximo;
     }
 
-    public void setProximo(Proyectos.Cola.Nodo<T> proximo) {
+    public void setProximo(Nodo<T> proximo) {
         this.proximo = proximo;
     }
 
